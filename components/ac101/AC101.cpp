@@ -148,8 +148,8 @@ void AC101::SetVolumeHeadphone(uint8_t volume) {
 
   uint16_t val;
   AC101_READ_REG(AC101_HPOUT_CTRL, &val);
-  val &= ~63 << 4;
-  val |= volume << 4;
+  val &= ~(0x3F << 4);  // Corrigido para limpar os bits corretos
+  val |= (volume & 0x3F) << 4;  
   AC101_WRITE_REG(AC101_HPOUT_CTRL, val);
 }
 
